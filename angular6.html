@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="" ng-init="
+        students=[
+        {name:'Vorakan', gpa:3.7 , gender:'M', year:4},
+        {name:'Kanyapat', gpa:3.9 , gender:'F', year:2},
+        {name:'Rapeepat', gpa:2.7 , gender:'M', year:3},
+        {name:'Poonpipat', gpa:1.7 , gender:'M', year:2},
+        {name:'Chotiwit', gpa:3.0 , gender:'M', year:3},
+        {name:'Thanapat', gpa:2.5 , gender:'M', year:4}]">
+        <input type="text" ng-model="userFilter.gender"> 
+        <table border="1">
+            <tr><th>Name</th> <th>GPA</th> <th>Gender</th> <th>Year of Study</th></tr>
+            <tr ng-repeat="x in students | orderBy: 'gpa':reverse=true | filter:userFilter " ><td>{{x.name}}</td> <td>{{x.gpa}}</td> <td>{{x.gender}}</td> <td>{{x.year}}</td></tr>
+        </table>
+    </div>
+</body>
+</html>

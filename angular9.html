@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- <script src="./playerlist.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="appdb" ng-controller="dataCtrl"> 
+        <table border="1">
+            <tr><th>Name of Product</th> <th>Price</th></tr>
+            <tr ng-repeat="product in products.data">
+                <td>{{product.title}}</td> <td>{{product.price}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var app = angular.module('appdb',[]);
+        app.controller('dataCtrl',['$scope','$http',function ($scope,$http) {
+            $scope.getProducts = function () {
+                $http({
+                    method: 'get',
+                    url: 'http://10.4.53.25:8099/shopJson',
+                    header: {'Content-Type': 'apllication/json','Access-Control-Allow-Origin':'*','Accept':'application/json'}
+                }).then(function successCallBack(response) {
+                    $scope.products = response.data;
+                })
+            }
+            $scope.getProducts();
+        }])
+    </script>
+</body>
+</html>

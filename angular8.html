@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="./playerlist.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="footballApp" ng-controller="footballController">
+        <b ng-bind="positionsInTeam"></b>  {{xPosition}} {{yPosition}}
+        <br> You can filter for a specific position:
+        <select name="" id="" ng-model="chosenPosition" ng-options="choicePos.pos for choicePos in positions">
+            
+        </select>
+        <table border="1">
+            <tr><th>#</th> <th ng-click="orderFunction('first_name')">FirstName</th> <th ng-click="orderFunction('last_name')">LastName</th> <th ng-click="orderFunction('team')">Team</th></tr>
+            <tr ng-if="player.first_name !=null" ng-repeat="player in playerList | orderBy: myOrder  | filter: chosenPosition.pos">
+                <td>{{$index}}</td>
+                <td ng-mouseOver="displayPosition(player.position, $event)" ng-mouseleave="mouseLeaveFunction()">{{player.first_name}}</td>
+                <td>{{player.last_name}}</td>
+                <td>{{player.team}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var app = angular.module('footballApp',[]);
+        app.controller('footballController', function ($scope) {
+            $scope.positions = [{pos:''},{pos:'Defender'},{pos:'Midfielder 1'},
+                               {pos:'Midfielder 2'},{pos:'Striker'},{pos:'Goalkeeper'}]
+            $scope.playerList = players;
+            $scope.displayPosition = function (position, myEvent) {
+                $scope.positionsInTeam = position;
+                $scope.xPosition = myEvent.clientX;
+                $scope.yPosition = myEvent.clientY;
+            }
+            $scope.mouseLeaveFunction = function () {
+                $scope.positionsInTeam = "";
+            }
+            reverse="-"
+            $scope.orderFunction = function (orderColumn) {
+                reverse==""?reverse="-":reverse="";
+                $scope.myOrder = reverse + orderColumn;
+            }
+        })
+    </script>
+</body>
+</html>

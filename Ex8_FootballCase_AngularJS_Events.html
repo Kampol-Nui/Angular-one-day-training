@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="playerlist.js"></script>
+    <title>Premier League Football Players</title>
+</head>
+<body>
+    <div ng-app="footballApp" ng-controller="footballCtrl">
+        <table border="1">
+            <tr><th>#</th> 
+                <th ng-click="orderFunction('first_name')" >First Name</th>
+                <th ng-click="orderFunction('last_name')">Last Name</th> 
+                <th ng-click="orderFunction('team')">Team</th></tr>
+            <tr ng-repeat="player in playerList | orderBy: myOrder  "> 
+                <td>{{$index}} </td>
+                <td>{{player.first_name}}</td>
+                <td>{{player.last_name}}</td>
+                <td>{{player.team}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var app = angular.module('footballApp',[]);
+        app.controller('footballCtrl', function ($scope) {
+            $scope.playerList = players;
+
+            reverse="";
+            $scope.orderFunction = function (orderColumn) {
+                reverse==""?reverse="-":reverse="";
+                $scope.myOrder = reverse+orderColumn;
+            }            
+        })
+    </script>
+</body>
+</html>

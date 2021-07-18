@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>bmi</title>
+</head>
+
+<body>
+    <div ng-app="" ng-init="shop='Nui Health Care Service'; weight=0; height=0; 
+    bmiString=[
+    {min:1, max:18.5, str:'Below Normal weight'},
+    {min:18.5, max:25, str:'Normal weight'},
+    {min:25, max:30, str:'Over weight'},
+    {min:30, max:10000, str:'Obesity '}]">
+        <h3>Wecome to {{shop}}</h3>
+        What is your name?
+        <input type="text" name="" id="" ng-model="uname"><br>
+
+        <b ng-bind="uname"></b>
+        <span ng-if="uname">
+            is our value customer
+        </span>
+        <h2>bmi application</h2>
+        <br>
+        What is your weight in kilograms?
+        <br><input type="number" name="" id="" ng-model="weight">
+        <br> What is our height in centimeters?
+        <br> <input type="number" name="" id="" ng-model="height">
+        <br><i ng-if="weight && height">
+            According to your weight of {{weight}} kilograms,
+            and height of {{height}} centimeters,
+            bmi of {{uname}} is {{weight /(height/100 * height/100)}}
+        </i>
+        <ul>
+            <span ng-repeat="ob in bmiString">
+                <li ng-if="weight /(height/100 * height/100) >= ob.min && weight /(height/100 * height/100) < ob.max">
+                        {{ob.str}} you are in level {{$index+1}}
+                </li>
+            </span>
+        </ul>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Hello MVC angular framework</title>
+</head>
+<body>
+    <div ng-app="app1" ng-controller="ctrl2">
+        <input type="text" name="" id="" ng-model="customerName">
+        <p ng-bind="greeting"></p>
+        <p ng-bind="customerName"></p>
+    </div>
+    <script>
+        var app = angular.module('app1', []);
+        app.controller('ctrl2', function ($scope) {
+            $scope.customerName = "Jack";
+            $scope.greeting =  $scope.customerName;
+        })
+    </script>
+</body>
+</html>
